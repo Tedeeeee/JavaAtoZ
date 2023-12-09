@@ -15,16 +15,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfig {
 
-    @Autowired
     private MemberRepository memberRepository;
-    @Autowired
     private DiscountPolicy discountPolicy;
 
-    @Bean
-    public MemberService memberService() {
-        System.out.println("call AppConfig.memberService");
-        return new MemberServiceImpl(memberRepository());
-    }
+//    @Bean
+//    public MemberService memberService() {
+//        System.out.println("call AppConfig.memberService");
+//        return new MemberServiceImpl(memberRepository());
+//    }
 
     @Bean
     public OrderService orderService() {
@@ -33,11 +31,11 @@ public class AppConfig {
         return null;
     }
 
-    @Bean
-    public MemberRepository memberRepository() {
-        System.out.println("call AppConfig.memberRepository");
-        return new MemoryMemberRepository();
-    }
+//    @Bean
+//    public MemberRepository memberRepository() {
+//        System.out.println("call AppConfig.memberRepository");
+//        return new MemoryMemberRepository();
+//    }
 
     @Bean
     public DiscountPolicy discountPolicy() {
