@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class JpaMain {
@@ -18,16 +19,13 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setUsername("member1");
+            List<Member> result = em.createQuery(
+                    "select m from Member m where m.username like '%kim%'", Member.class
+            ).getResultList();
 
-            em.persist(member);
-
-            Team team = new Team();
-            team.setName("teamA");
-            team.getMembers().add(member);
-
-            em.persist(team);
+            for (Member member : result) {
+                System.out.println("member = " + member);
+            }
 
             tx.commit();
         } catch (Exception e) {
@@ -37,4 +35,19 @@ public class JpaMain {
         }
         emf.close();
     }
+
+    
+/*    // Member 만 가져오고 싶은 메소드
+    private static void printMember(Member findMember) {
+        System.out.println("member = " + findMember.getUsername());
+    }
+
+    // Member 와 Team 을 다 출력하고 싶을때
+    public static void printMemberAndTeam(Member member) {
+        String username = member.getUsername();
+        System.out.println("username = " + username);
+
+        Team team = member.getTeam();
+        System.out.println("team = " + team.getName());
+    }*/
 }
