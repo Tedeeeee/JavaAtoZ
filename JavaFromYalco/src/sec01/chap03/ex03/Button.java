@@ -9,7 +9,7 @@ public class Button {
     char print;
     int space;
 
-    public Button(char print, int space) {
+    Button(char print, int space) {
         this.print = print;
         this.space = space;
     }

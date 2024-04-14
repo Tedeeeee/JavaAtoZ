@@ -8,6 +8,15 @@ public class Main {
 
         Button[] buttons = {button1, buttonPlus, buttonClear};
 
+        Button.switchMode();
+        System.out.println(Button.mode);
+        for (Button button : buttons) button.place();
+
+        Button.switchMode();
+        System.out.println(Button.mode);
+        for (Button button : buttons) button.place();
+
+        Button.switchMode();
         System.out.println(Button.mode);
         for (Button button : buttons) button.place();
     }
