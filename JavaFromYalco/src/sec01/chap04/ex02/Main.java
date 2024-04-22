@@ -8,5 +8,15 @@ public class Main {
         SmartPhone smartPhone = new SmartPhone();
         // default 제어자는 사용 불가능
         String sdCardSlot = smartPhone.sdCardSlot;
+
+        Button button1 = new Button('1', 1);
+
+        Button.switchMode();
+
+        button1.setSpace(3);
+        // 조건으로 인해 fail
+        button1.setSpace(-1);
+
+        String button1Print = button1.getButtonInfo();
     }
 }
