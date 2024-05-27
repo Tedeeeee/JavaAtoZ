@@ -58,5 +58,11 @@ public class Main {
 
         ints3.remove(4);
         ints3.remove((Integer) 55);
+
+        // 주어진 콜렉션에 있는 요소들을 지운다
+        ints1.removeAll(ints3);
+
+        // 콜렉션을 이어 붙인다.
+        ints1.addAll(ints3);
     }
 }
