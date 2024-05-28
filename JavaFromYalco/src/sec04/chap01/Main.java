@@ -1,4 +1,4 @@
-package src.sec04;
+package src.sec04.chap01;
 
 import src.sec03.chap04.Knight;
 
