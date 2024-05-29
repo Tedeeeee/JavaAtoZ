@@ -1,5 +1,7 @@
 package src.sec05.chap03;
 
+import java.util.TreeSet;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
@@ -32,5 +34,36 @@ public class Main {
         UnaryOperator<String> toLCaseMR = String::toLowerCase;
 
         String toLCase = toLCaseMR.apply("HELLO");
+
+        System.out.println("\n- - - - - -");
+
+        // 한개의 인자만 받는 것은 new 라는 연산자를 메소드 참조로 만들수 있다.
+        Function<String, Button> strToButtonLD = s -> new Button(s);
+        Function<String, Button> strToButtonMR = Button::new;
+
+        Button button1 = strToButtonMR.apply("Dog");
+
+        // 두개의 인자를 받는 생성자도 존재하기 때문에 new 연산자를 통해 생성 가능
+        BiFunction<String, String, Button> twoStrToButtonLD = (s1, s2) -> new Button(s1, s2);
+        BiFunction<String, String, Button> twoStrToButtonMR = Button::new;
+
+        Button button2 = twoStrToButtonMR.apply("고양이", "야옹");
+        // Button에서 제작된 run을 실행
+        button2.onClick();
+
+        System.out.println("- - - - - -");
+
+        // 반환값이 존재하지 않는 print이기 때문에 Runnable로 구현 가능
+        Runnable catCryLD = () -> button2.onClick();
+        // button1 에 존재하는 onClick를 메소드 참조로 구현
+        Runnable catCryMR = button2::onClick;
+
+        catCryMR.run();
+
+        //  💡 임의의 인스턴스의 메소드 참조
+        // compareTo는 1개의 인자만을 받지만 두 개의 인자가 가능한 이유는
+        // 첫번째 인자가 임의의 인스턴스로 만들어져서 비교가 되기 때문이다.
+        TreeSet<String> treeSetLD = new TreeSet<>((s1, s2) -> s1.compareTo(s2));
+        TreeSet<String> treeSetMD = new TreeSet<>(String::compareTo);
     }
 }
