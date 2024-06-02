@@ -116,5 +116,46 @@ public class Ex01 {
                 .limit(10)
                 .peek(System.out::println)
                 .sum();
+
+        System.out.println("\n- - - - - -");
+
+        // reduce : 주어진 BiFunction으로 값을 접어나간다
+        // seed 값이 없을 때 : Optional 반환한다. ( 비어 있는 스트림 일 수 있기 때문 )
+        int intReduce = IntStream.range(1, 10)
+                .reduce((prev, curr) -> {
+                    System.out.printf("prev : %d, cur : %d%n", prev, curr);
+                    return prev * curr;
+                })
+                .getAsInt();
+
+        // seed 값이 있을때 : getAsInt() 와 같은 값을 넣지 않는다.
+        // 초기값은 람다식 앞에 붙여준다.
+        int intReduceWithSeed = IntStream.range(1, 10)
+                .reduce(2, (prev, curr) -> prev * curr);
+
+        StringStat stringStat = "Hello World! Welcome to the world of Java~"
+                .chars()
+                .boxed()
+                .reduce(
+                        new StringStat(),
+                        (ss, i) -> {
+                            ss.length++;
+                            if (i >= 'A' && i <= 'Z') { ss.upperCases++; }
+                            else if (i >= 'a' && i <= 'z') { ss.lowerCases++; }
+                            else { ss.nonLetters++; }
+                            return ss;
+                        },
+                        //  아래의 combiner 인자는 병령 연산에서만 작용 (여기서는 무의미)
+                        //  요소와 다른 타입을 반환하는 오버로드의 필수인자이므로 임의로 넣음
+                        (ss1, ss2) -> ss1
+                );
+    }
+
+    public static class StringStat{
+        int length = 0;
+        int upperCases = 0;
+        int lowerCases = 0;
+        int nonLetters = 0;
+
     }
 }
