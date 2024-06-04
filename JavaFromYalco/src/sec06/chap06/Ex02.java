@@ -87,12 +87,16 @@ public class Ex02 {
                 });
 
         // Optional의 filter와 map 메소드
+        // Optional의 filter : 걸러진 값은 null로 인식
+        // Stream의 filter : 걸러낸 값들만 사용
         optInts.stream()
                 .forEach(opt -> {
                     System.out.println(
                             opt
                                     .filter(i -> i % 2 == 1)
                                     .map(i -> "%d 출력".formatted(i))
+                                    // filter에 의해 짝수는 모두 null로 본다
+                                    // 때문에 SKIP으로 변경된 것을 확인
                                     .orElse("(SKIP)")
                     );
                 });
