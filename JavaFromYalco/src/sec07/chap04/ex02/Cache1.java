@@ -6,12 +6,13 @@ public class Cache1 {
     public static void main(String[] args) {
         new Thread(() -> {
             int i = 0;
+            // 컴퓨터가 stop이 true로 변환된 것을 모르고 무한 루프가 진행
             while (!stop) {
                 i++;
 
                 // 주석 처리의 차이
                 // print 가 되지 않으면 JVM입장에서 굳이 일하던걸 내놓을 필요가 없다
-                // 때문에 문제가 발생하지 않는것이다.
+                // 때문에 "쓰레드 종료"라는 문구가 나가지 않고 계속해서 while문이 도는 것이다.
                 //System.out.println(i);
             }
 
